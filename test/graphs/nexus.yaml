@@ -1,0 +1,12 @@
+graphs:
+
+  - nodes:
+    - id: nexus
+      module: timeflux_nexus.nodes.driver
+      class: Nexus
+    - id: display
+      module: timeflux.nodes.debug
+      class: Display
+    edges:
+    - source: nexus
+      target: display
