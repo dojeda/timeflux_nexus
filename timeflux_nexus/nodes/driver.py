@@ -47,7 +47,7 @@ class Nexus(Node):
 
     def __init__(self, sampling_rate=512, search_mode='auto', serial_number=0):
 
-        self.serial_number = serial_number
+        self.serial_number = int(serial_number)
         self.sampling_rate = sampling_rate
         if search_mode not in ['auto', 'usb', 'bluetooth']:
             raise(ValueError('search_mode must be auto, usb or bluetooth. %s was provided' % search_mode))
