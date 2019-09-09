@@ -1,6 +1,6 @@
 # Mind Media Nexus plugin
 
-This plugin provides a driver for the Nexus device.
+This plugin provides a driver for the [Nexus](https://www.mindmedia.com/en/products/systems/) device.
 
 ## Installation
 
