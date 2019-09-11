@@ -75,7 +75,7 @@ class Nexus(Node):
             libname = 'GenericDeviceInterfaceDLL.dll' if bitness == 32 else 'GenericDeviceInterfaceDLL_x64.dll'
         else:
             raise WorkerInterrupt('Operating system not compatible')
-        libpath = os.path.join(os.path.dirname(__file__), '../libs', libname)
+        libpath = os.path.join(os.path.dirname(__file__), '..', 'libs', libname)
         self.lib = CDLL(libpath)
 
     def _init_lib(self):
