@@ -1,0 +1,6 @@
+include libs/GenericDeviceInterfaceDLL.dll
+include libs/MindMedia_SDK.dll
+include libs/GenericDeviceInterfaceDLL_x64.dll
+include libs/msvcr100.dll
+include libs/msvcp100.dll
+include libs/mfc100.dll

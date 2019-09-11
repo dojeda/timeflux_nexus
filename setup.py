@@ -11,7 +11,7 @@ with open('timeflux_nexus/__init__.py') as f:
 
 setup(
     name='timeflux-nexus',
-    packages=find_packages(),
+    packages=find_packages(exclude=['test']),
     version=VERSION,
     description='Mind Media Nexus plugin.',
     long_description=DESCRIPTION,
