@@ -10,7 +10,7 @@ with open('timeflux_nexus/__init__.py') as f:
     VERSION = re.search('^__version__\s*=\s*\'(.*)\'', f.read(), re.M).group(1)
 
 dependencies = [
-    'timeflux @ git+https://https://github.com/timeflux/timeflux#egg=timeflux'
+    'timeflux @ git+https://github.com/timeflux/timeflux#egg=timeflux'
 ]
 
 setup(
