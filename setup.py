@@ -22,5 +22,6 @@ setup(
     author='Pierre Clisson',
     author_email='contact@timeflux.io',
     url='https://timeflux.io',
+    include_package_data=True,
     install_requires=dependencies,
 )
