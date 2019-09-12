@@ -1,0 +1,6 @@
+include timeflux_nexus/libs/GenericDeviceInterfaceDLL.dll
+include timeflux_nexus/libs/MindMedia_SDK.dll
+include timeflux_nexus/libs/GenericDeviceInterfaceDLL_x64.dll
+include timeflux_nexus/libs/msvcr100.dll
+include timeflux_nexus/libs/msvcp100.dll
+include timeflux_nexus/libs/mfc100.dll
