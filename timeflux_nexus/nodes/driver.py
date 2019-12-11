@@ -65,6 +65,12 @@ class Nexus(Node):
         self._query_device()
         self._start_device()
 
+        self._meta = {
+            'serial_number': self.serial_number,
+            'rate': self.sampling_rate,
+            'search_mode': self.search_mode
+        }
+
     def terminate(self):
         self.lib.StopGenericDevice()
 
@@ -143,5 +149,5 @@ class Nexus(Node):
     def update(self):
         with self.lock:
             if self._buffer:
-                self.o.set(np.vstack(self._buffer), None, self.channels)
+                self.o.set(np.vstack(self._buffer), None, self.channels, self._meta)
                 self._buffer = []
