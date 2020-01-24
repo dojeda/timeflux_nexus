@@ -34,7 +34,7 @@ class ChannelInfoStruct(Structure):
 
 class Nexus(Node):
 
-    ErrorCodeMessage = [
+    ErrorCodeMessage = [ # TODO: This should be a dict.
         'OK',
         'No valid Device',
         'Memory allocation failure (Channel info)',
@@ -101,13 +101,13 @@ class Nexus(Node):
         ret = self.lib.InitGenericDevice(self.callback, sm[self.search_mode], self.serial_number)
         if ret != 0:
             self.logger.error('Could not connect to Nexus device! Error code %d: %s',
-                              ret, self.ErrorCodeMessage.get(abs(ret), 'Unknown'))
+                              ret, self._get_error_msg(ret))
             if ret ==- 6:
                 auth = self.lib.ShowAuthenticationWindow()
                 if auth == 1:
                     raise WorkerInterrupt('Authentication failed')
             else:
-                raise WorkerInterrupt(self.ErrorCodeMessage[abs(ret)])
+                raise WorkerInterrupt(self._get_error_msg(ret))
 
     def _query_device(self):
 
@@ -137,8 +137,8 @@ class Nexus(Node):
         ret = self.lib.StartGenericDevice(byref(fs))
         if ret != 0:
             self.logger.error('Could not start Nexus device! Error code %d: %s',
-                              ret, self.ErrorCodeMessage.get(abs(ret), 'Unknown'))
-            raise WorkerInterrupt(self.ErrorCodeMessage[abs(ret)])
+                              ret, self._get_error_msg(ret))
+            raise WorkerInterrupt(self._get_error_msg(ret))
 
     def _on_data(self, nSamples, nChannels, data):
         """Callback to receive data."""
@@ -149,6 +149,12 @@ class Nexus(Node):
                     index = (i * nChannels) + ch
                     out[i, ch] = data[index]
             self._buffer.append(out)
+
+    def _get_error_msg(self, code):
+        code = abs(code or 0)
+        if code < len(self.ErrorCodeMessage):
+            return self.ErrorCodeMessage[code]
+        return 'Unknown'
 
     def update(self):
         with self.lock:
