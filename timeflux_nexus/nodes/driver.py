@@ -100,6 +100,8 @@ class Nexus(Node):
         sm = {'auto': 0, 'usb': 1, 'bluetooth': 2}
         ret = self.lib.InitGenericDevice(self.callback, sm[self.search_mode], self.serial_number)
         if ret != 0:
+            self.logger.error('Could not connect to Nexus device! Error code %d: %s',
+                              ret, self.ErrorCodeMessage.get(abs(ret), 'Unknown'))
             if ret ==- 6:
                 auth = self.lib.ShowAuthenticationWindow()
                 if auth == 1:
@@ -134,6 +136,8 @@ class Nexus(Node):
         fs = wintypes.DWORD(self.sampling_rate)
         ret = self.lib.StartGenericDevice(byref(fs))
         if ret != 0:
+            self.logger.error('Could not start Nexus device! Error code %d: %s',
+                              ret, self.ErrorCodeMessage.get(abs(ret), 'Unknown'))
             raise WorkerInterrupt(self.ErrorCodeMessage[abs(ret)])
 
     def _on_data(self, nSamples, nChannels, data):
